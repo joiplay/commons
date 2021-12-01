@@ -1,6 +1,7 @@
 package cyou.joiplay.commons.model;
 
 public class GamePad {
+    public Boolean diagonalMovement = false;
     public Integer btnOpacity = 100;
     public Integer btnScale = 100;
     public Integer aKeyCode = 0;

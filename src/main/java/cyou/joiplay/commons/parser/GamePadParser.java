@@ -1,7 +1,5 @@
 package cyou.joiplay.commons.parser;
 
-import android.util.Log;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -12,55 +10,64 @@ import cyou.joiplay.commons.file.FileUtils;
 import cyou.joiplay.commons.model.GamePad;
 
 public class GamePadParser {
-    private static final String TAG = "GamePadParser";
     public static void parse(GamePad gamePad, String jsonString) throws JSONException{
         JSONObject jsonObject = new JSONObject(jsonString);
 
-        if (jsonObject.has("btnOpacity")){
-            gamePad.btnOpacity = jsonObject.getJSONObject("btnOpacity").getInt("int");
-        }
+        if (jsonObject.has("gamepad")){
+            JSONObject gamepadObject = jsonObject.getJSONObject("gamepad");
 
-        if (jsonObject.has("btnScale")){
-            gamePad.btnScale = jsonObject.getJSONObject("btnScale").getInt("int");
-        }
+            if (gamepadObject.has("diagonalMovement")){
+                gamePad.diagonalMovement = gamepadObject.getJSONObject("diagonalMovement").getBoolean("boolean");
+            }
 
-        if (jsonObject.has("aKeyCode")){
-            gamePad.aKeyCode = jsonObject.getJSONObject("aKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("btnOpacity")){
+                gamePad.btnOpacity = gamepadObject.getJSONObject("btnOpacity").getInt("int");
+            }
 
-        if (jsonObject.has("bKeyCode")){
-            gamePad.bKeyCode = jsonObject.getJSONObject("bKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("btnScale")){
+                gamePad.btnScale = gamepadObject.getJSONObject("btnScale").getInt("int");
+            }
 
-        if (jsonObject.has("cKeyCode")){
-            gamePad.cKeyCode = jsonObject.getJSONObject("cKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("aKeyCode")){
+                gamePad.aKeyCode = gamepadObject.getJSONObject("aKeyCode").getInt("int");
+            }
 
-        if (jsonObject.has("xKeyCode")){
-            gamePad.xKeyCode = jsonObject.getJSONObject("xKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("bKeyCode")){
+                gamePad.bKeyCode = gamepadObject.getJSONObject("bKeyCode").getInt("int");
+            }
 
-        if (jsonObject.has("yKeyCode")){
-            gamePad.yKeyCode = jsonObject.getJSONObject("yKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("cKeyCode")){
+                gamePad.cKeyCode = gamepadObject.getJSONObject("cKeyCode").getInt("int");
+            }
 
-        if (jsonObject.has("zKeyCode")){
-            gamePad.zKeyCode = jsonObject.getJSONObject("zKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("xKeyCode")){
+                gamePad.xKeyCode = gamepadObject.getJSONObject("xKeyCode").getInt("int");
+            }
 
-        if (jsonObject.has("lKeyCode")){
-            gamePad.lKeyCode = jsonObject.getJSONObject("lKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("yKeyCode")){
+                gamePad.yKeyCode = gamepadObject.getJSONObject("yKeyCode").getInt("int");
+            }
 
-        if (jsonObject.has("rKeyCode")){
-            gamePad.rKeyCode = jsonObject.getJSONObject("rKeyCode").getInt("int");
-        }
+            if (gamepadObject.has("zKeyCode")){
+                gamePad.zKeyCode = gamepadObject.getJSONObject("zKeyCode").getInt("int");
+            }
 
-        return;
+            if (gamepadObject.has("lKeyCode")){
+                gamePad.lKeyCode = gamepadObject.getJSONObject("lKeyCode").getInt("int");
+            }
+
+            if (gamepadObject.has("rKeyCode")){
+                gamePad.rKeyCode = gamepadObject.getJSONObject("rKeyCode").getInt("int");
+            }
+        }
     }
 
     public static void loadFromFile(GamePad gamePad, File file) throws IOException, JSONException {
         JSONObject jsonObject = new JSONObject(FileUtils.readText(file));
+
+        if (jsonObject.has("diagonalMovement")){
+            gamePad.diagonalMovement = jsonObject.getBoolean("diagonalMovement");
+        }
 
         if (jsonObject.has("btnOpacity")){
             gamePad.btnOpacity = jsonObject.getInt("btnOpacity");
@@ -105,6 +112,7 @@ public class GamePadParser {
 
     public static void saveToFile(GamePad gamePad, File file) throws JSONException, IOException {
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("diagonalMovement", gamePad.diagonalMovement);
         jsonObject.put("btnOpacity", gamePad.btnOpacity);
         jsonObject.put("btnScale", gamePad.btnScale);
         jsonObject.put("aKeyCode", gamePad.aKeyCode);
