@@ -59,6 +59,14 @@ public class GamePadParser {
             if (gamepadObject.has("rKeyCode")){
                 gamePad.rKeyCode = gamepadObject.getJSONObject("rKeyCode").getInt("int");
             }
+
+            if (gamepadObject.has("clKeyCode")){
+                gamePad.clKeyCode = gamepadObject.getJSONObject("clKeyCode").getInt("int");
+            }
+
+            if (gamepadObject.has("crKeyCode")){
+                gamePad.crKeyCode = gamepadObject.getJSONObject("crKeyCode").getInt("int");
+            }
         }
     }
 
@@ -108,6 +116,14 @@ public class GamePadParser {
         if (jsonObject.has("rKeyCode")){
             gamePad.rKeyCode = jsonObject.getInt("rKeyCode");
         }
+
+        if (jsonObject.has("clKeyCode")){
+            gamePad.clKeyCode = jsonObject.getInt("clKeyCode");
+        }
+
+        if (jsonObject.has("crKeyCode")){
+            gamePad.crKeyCode = jsonObject.getInt("crKeyCode");
+        }
     }
 
     public static void saveToFile(GamePad gamePad, File file) throws JSONException, IOException {
@@ -123,6 +139,8 @@ public class GamePadParser {
         jsonObject.put("zKeyCode", gamePad.zKeyCode);
         jsonObject.put("lKeyCode", gamePad.lKeyCode);
         jsonObject.put("rKeyCode", gamePad.rKeyCode);
+        jsonObject.put("clKeyCode", gamePad.clKeyCode);
+        jsonObject.put("crKeyCode", gamePad.crKeyCode);
 
         FileUtils.writeText(file, jsonObject.toString(4));
     }

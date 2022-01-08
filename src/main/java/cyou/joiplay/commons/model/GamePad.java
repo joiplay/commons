@@ -14,4 +14,6 @@ public class GamePad {
     public Integer zKeyCode = KeyEvent.KEYCODE_Q;
     public Integer lKeyCode = KeyEvent.KEYCODE_ENTER;
     public Integer rKeyCode = KeyEvent.KEYCODE_ESCAPE;
+    public Integer clKeyCode = KeyEvent.KEYCODE_F2;
+    public Integer crKeyCode = KeyEvent.KEYCODE_F8;
 }
