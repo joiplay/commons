@@ -1,5 +1,7 @@
 package cyou.joiplay.commons.file;
 
+import android.content.Context;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -23,6 +25,42 @@ public class FileUtils {
         if (target.exists()) target.delete();
 
         InputStream in = new BufferedInputStream(new FileInputStream(source));
+        OutputStream out = new BufferedOutputStream(new FileOutputStream(target));
+
+        byte[] buffer = new byte[1024];
+        int lengthRead;
+        while ((lengthRead = in.read(buffer)) > 0) {
+            out.write(buffer, 0, lengthRead);
+            out.flush();
+        }
+    }
+
+    static public void copyAssets(Context context, String sourcePath, String targetPath) throws IOException {
+        File targetFolder = new File(targetPath);
+
+        if (!targetFolder.exists())
+            targetFolder.mkdirs();
+
+        for(String path: context.getAssets().list(sourcePath)){
+            boolean isFile = context.getAssets().list(sourcePath+"/"+path).length == 0;
+
+            if (isFile){
+                copyAsset(context, sourcePath+"/"+path, targetPath+"/"+path);
+            } else {
+                copyAssets(context, sourcePath+"/"+path, targetPath+"/"+path);
+            }
+        }
+    }
+
+    static public void copyAsset(Context context, String sourcePath, String targetPath) throws IOException {
+        File target = new File(targetPath);
+
+        if (target.exists()) target.delete();
+
+        if (!target.getParentFile().exists())
+            target.getParentFile().mkdirs();
+
+        InputStream in = new BufferedInputStream(context.getAssets().open(sourcePath));
         OutputStream out = new BufferedOutputStream(new FileOutputStream(target));
 
         byte[] buffer = new byte[1024];
