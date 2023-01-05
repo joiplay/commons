@@ -1,6 +1,7 @@
 package cyou.joiplay.commons.model;
 
 public class MKXPConfiguration {
+    public int screenTimeout = 0;
     public String forcedDim = "640x480";
     public String fontScale = "0.7";
     public String fastForwardSpeed = "1";

@@ -19,6 +19,10 @@ public class MKXPConfigurationParser {
             if (appObject.has("cheats")){
                 configuration.cheats = appObject.getJSONObject("cheats").getBoolean("boolean");
             }
+
+            if (appObject.has("screenTimeout")){
+                configuration.screenTimeout = appObject.getJSONObject("screenTimeout").getInt("int");
+            }
         }
 
         if (jsonObject.has("rpg")){
@@ -85,6 +89,10 @@ public class MKXPConfigurationParser {
     public static void loadFromFile(MKXPConfiguration configuration, File file) throws IOException, JSONException {
         JSONObject jsonObject = new JSONObject(FileUtils.readText(file));
 
+        if (jsonObject.has("screenTimeout")){
+            configuration.screenTimeout = jsonObject.getInt("screenTimeout");
+        }
+
         if (jsonObject.has("windowSize")){
             configuration.forcedDim = jsonObject.getString("windowSize");
         }
@@ -148,6 +156,7 @@ public class MKXPConfigurationParser {
 
     public static void saveToFile(MKXPConfiguration configuration, File file) throws JSONException, IOException {
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("screenTimeout", configuration.screenTimeout);
         jsonObject.put("windowSize", configuration.forcedDim);
         jsonObject.put("fontScale", configuration.fontScale);
         jsonObject.put("speedUp", configuration.fastForwardSpeed);

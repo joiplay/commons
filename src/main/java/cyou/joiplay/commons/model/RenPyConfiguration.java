@@ -1,6 +1,7 @@
 package cyou.joiplay.commons.model;
 
 public class RenPyConfiguration {
+    public int screenTimeout = 0;
     public boolean cheats = false;
     public boolean renpy_hw_video = true;
     public boolean renpy_autosave = false;

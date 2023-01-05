@@ -19,6 +19,10 @@ public class RenPyConfigurationParser {
             if (appObject.has("cheats")){
                 configuration.cheats = appObject.getJSONObject("cheats").getBoolean("boolean");
             }
+
+            if (appObject.has("screenTimeout")){
+                configuration.screenTimeout = appObject.getJSONObject("screenTimeout").getInt("int");
+            }
         }
 
         if (jsonObject.has("renpy")){
@@ -53,6 +57,10 @@ public class RenPyConfigurationParser {
     public static void loadFromFile(RenPyConfiguration configuration, File file) throws IOException, JSONException {
         JSONObject jsonObject = new JSONObject(FileUtils.readText(file));
 
+        if (jsonObject.has("screenTimeout")){
+            configuration.screenTimeout = jsonObject.getInt("screenTimeout");
+        }
+
         if (jsonObject.has("cheats")){
             configuration.cheats = jsonObject.getBoolean("cheats");
         }
@@ -84,6 +92,7 @@ public class RenPyConfigurationParser {
 
     public static void saveToFile(RenPyConfiguration configuration, File file) throws JSONException, IOException {
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("screenTimeout", configuration.screenTimeout);
         jsonObject.put("cheats", configuration.cheats);
         jsonObject.put("renpy_hw_video", configuration.renpy_hw_video);
         jsonObject.put("renpy_autosave", configuration.renpy_autosave);
