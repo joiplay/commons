@@ -44,6 +44,10 @@ public class MKXPConfigurationParser {
                 configuration.customFont = rpgObject.getJSONObject("customFont").getString("string");
             }
 
+            if (rpgObject.has("verticalScreenAlign")){
+                configuration.verticalScreenAlign = rpgObject.getJSONObject("verticalScreenAlign").getString("string");
+            }
+
             if (rpgObject.has("enablePostloadScripts")){
                 configuration.enablePostloadScripts = rpgObject.getJSONObject("enablePostloadScripts").getBoolean("boolean");
             }
@@ -54,6 +58,10 @@ public class MKXPConfigurationParser {
 
             if (rpgObject.has("prebuiltPathCache")){
                 configuration.prebuiltPathCache = rpgObject.getJSONObject("prebuiltPathCache").getBoolean("boolean");
+            }
+
+            if (rpgObject.has("fastPathEnum")){
+                configuration.fastPathEnum = rpgObject.getJSONObject("fastPathEnum").getBoolean("boolean");
             }
 
             if (rpgObject.has("smoothScaling")){
@@ -83,6 +91,10 @@ public class MKXPConfigurationParser {
             if (rpgObject.has("useRuby18")){
                 configuration.useRuby18 = rpgObject.getJSONObject("useRuby18").getBoolean("boolean");
             }
+
+            if (rpgObject.has("useCJKFont")){
+                configuration.useCJKFont = rpgObject.getJSONObject("useCJKFont").getBoolean("boolean");
+            }
         }
     }
 
@@ -109,6 +121,10 @@ public class MKXPConfigurationParser {
             configuration.customFont = jsonObject.getString("customFont");
         }
 
+        if (jsonObject.has("verticalScreenAlign")){
+            configuration.verticalScreenAlign = jsonObject.getString("verticalScreenAlign");
+        }
+
         if (jsonObject.has("enablePostloadScripts")){
             configuration.enablePostloadScripts = jsonObject.getBoolean("enablePostloadScripts");
         }
@@ -119,6 +135,10 @@ public class MKXPConfigurationParser {
 
         if (jsonObject.has("prebuiltPathCache")){
             configuration.prebuiltPathCache = jsonObject.getBoolean("prebuiltPathCache");
+        }
+
+        if (jsonObject.has("fastPathEnum")){
+            configuration.fastPathEnum = jsonObject.getBoolean("fastPathEnum");
         }
 
         if (jsonObject.has("smoothScaling")){
@@ -152,6 +172,10 @@ public class MKXPConfigurationParser {
         if (jsonObject.has("useRuby18")){
             configuration.useRuby18 = jsonObject.getBoolean("useRuby18");
         }
+
+        if (jsonObject.has("useCJKFont")){
+            configuration.useCJKFont = jsonObject.getBoolean("useCJKFont");
+        }
     }
 
     public static void saveToFile(MKXPConfiguration configuration, File file) throws JSONException, IOException {
@@ -161,9 +185,11 @@ public class MKXPConfigurationParser {
         jsonObject.put("fontScale", configuration.fontScale);
         jsonObject.put("speedUp", configuration.fastForwardSpeed);
         jsonObject.put("customFont", configuration.customFont);
+        jsonObject.put("verticalScreenAlign", configuration.verticalScreenAlign);
         jsonObject.put("enablePostloadScripts", configuration.enablePostloadScripts);
         jsonObject.put("pathCache", configuration.pathCache);
         jsonObject.put("prebuiltPathCache", configuration.prebuiltPathCache);
+        jsonObject.put("fastPathEnum", configuration.fastPathEnum);
         jsonObject.put("smoothScaling", configuration.smoothScaling);
         jsonObject.put("vsync", configuration.vsync);
         jsonObject.put("solidFonts", configuration.solidFonts);
@@ -171,6 +197,7 @@ public class MKXPConfigurationParser {
         jsonObject.put("cheats", configuration.cheats);
         jsonObject.put("debug", configuration.debug);
         jsonObject.put("useRuby18", configuration.useRuby18);
+        jsonObject.put("useCJKFont", configuration.useCJKFont);
 
         FileUtils.writeText(file, jsonObject.toString(4));
     }

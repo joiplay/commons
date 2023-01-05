@@ -51,6 +51,14 @@ public class RenPyConfigurationParser {
             if (renpyObject.has("renpy_less_updates")){
                 configuration.renpy_less_updates = renpyObject.getJSONObject("renpy_less_updates").getBoolean("boolean");
             }
+
+            if (renpyObject.has("renpy_dont_use_gl2")){
+                configuration.renpy_dont_use_gl2 = renpyObject.getJSONObject("renpy_dont_use_gl2").getBoolean("boolean");
+            }
+
+            if (renpyObject.has("renpy_recompile")){
+                configuration.renpy_recompile = renpyObject.getJSONObject("renpy_recompile").getBoolean("boolean");
+            }
         }
     }
 
@@ -88,6 +96,14 @@ public class RenPyConfigurationParser {
         if (jsonObject.has("renpy_less_updates")){
             configuration.renpy_less_updates = jsonObject.getBoolean("renpy_less_updates");
         }
+
+        if (jsonObject.has("renpy_dont_use_gl2")){
+            configuration.renpy_dont_use_gl2 = jsonObject.getBoolean("renpy_dont_use_gl2");
+        }
+
+        if (jsonObject.has("renpy_recompile")){
+            configuration.renpy_recompile = jsonObject.getBoolean("renpy_recompile");
+        }
     }
 
     public static void saveToFile(RenPyConfiguration configuration, File file) throws JSONException, IOException {
@@ -100,6 +116,8 @@ public class RenPyConfigurationParser {
         jsonObject.put("renpy_vsync", configuration.renpy_vsync);
         jsonObject.put("renpy_less_memory", configuration.renpy_less_memory);
         jsonObject.put("renpy_less_updates", configuration.renpy_less_updates);
+        jsonObject.put("renpy_dont_use_gl2", configuration.renpy_dont_use_gl2);
+        jsonObject.put("renpy_recompile", configuration.renpy_recompile);
 
         FileUtils.writeText(file, jsonObject.toString(4));
     }
